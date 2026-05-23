@@ -82,13 +82,13 @@ export function Contact() {
                 <ContactRow
                   icon={<GitHubIcon />}
                   label="GitHub"
-                  value="github.com/jay"
+                  value={profile.socials.github.replace("https://", "").replace("www.", "")}
                   href={profile.socials.github}
                 />
                 <ContactRow
                   icon={<LinkedInIcon />}
                   label="LinkedIn"
-                  value="linkedin.com/in/jay"
+                  value={profile.socials.linkedin.replace("https://", "").replace("www.", "")}
                   href={profile.socials.linkedin}
                 />
               </div>
