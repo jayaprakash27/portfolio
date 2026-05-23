@@ -1,10 +1,11 @@
 "use client";
 
+import * as React from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { SectionHeading } from "@/components/sections/_heading";
-import { projects } from "@/lib/data";
+import { projects, screenshotFor, type Project } from "@/lib/data";
 
 export function Projects() {
   return (
@@ -34,28 +35,7 @@ export function Projects() {
               className="group block"
             >
               <GlassCard className="relative h-full overflow-hidden p-0">
-                {/* Preview region with gradient */}
-                <div
-                  className={`relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br ${p.accent}`}
-                >
-                  <div
-                    aria-hidden
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "radial-gradient(60% 60% at 50% 35%, rgba(255,255,255,0.18), transparent 65%)",
-                    }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-[clamp(3.2rem,8vw,6rem)] font-semibold leading-none tracking-[-0.05em] text-white/90 drop-shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
-                      {p.name}
-                    </span>
-                  </div>
-                  <div
-                    aria-hidden
-                    className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent"
-                  />
-                </div>
+                <ProjectPreview project={p} />
 
                 <div className="flex flex-col gap-4 p-6 sm:p-7">
                   <div className="flex items-start justify-between gap-4">
@@ -85,5 +65,66 @@ export function Projects() {
         </div>
       </div>
     </section>
+  );
+}
+
+function ProjectPreview({ project: p }: { project: Project }) {
+  const screenshotUrl = p.preview ?? screenshotFor(p.href);
+  const [imgLoaded, setImgLoaded] = React.useState(false);
+  const [imgFailed, setImgFailed] = React.useState(false);
+  const showImage = screenshotUrl && !imgFailed;
+
+  return (
+    <div
+      className={`relative aspect-[16/9] w-full overflow-hidden bg-gradient-to-br ${p.accent}`}
+    >
+      {/* Live/local screenshot — loaded async, fades in on success */}
+      {showImage && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={screenshotUrl}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-700 ${
+            imgLoaded ? "scale-100 opacity-100" : "scale-105 opacity-0"
+          } group-hover:scale-[1.03]`}
+          onLoad={() => setImgLoaded(true)}
+          onError={() => setImgFailed(true)}
+        />
+      )}
+
+      {/* Accent gradient + radial spotlight tint — preserves the brand color
+          even when a screenshot is present, and serves as the fallback look. */}
+      <div
+        aria-hidden
+        className={`absolute inset-0 bg-gradient-to-br ${p.accent} mix-blend-overlay`}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(60% 60% at 50% 35%, rgba(255,255,255,0.18), transparent 65%)",
+        }}
+      />
+
+      {/* Darkening overlay — stronger at bottom for project-name legibility */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.30) 50%, rgba(0,0,0,0.65) 100%)",
+        }}
+      />
+
+      {/* Project name */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-[clamp(3.2rem,8vw,6rem)] font-semibold leading-none tracking-[-0.05em] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
+          {p.name}
+        </span>
+      </div>
+    </div>
   );
 }

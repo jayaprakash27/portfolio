@@ -1,10 +1,11 @@
 "use client";
 
+import * as React from "react";
 import { motion } from "framer-motion";
-import { Briefcase } from "lucide-react";
+import { ArrowUpRight, Briefcase } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { SectionHeading } from "@/components/sections/_heading";
-import { experience } from "@/lib/data";
+import { experience, faviconFor, type Experience as ExperienceItem } from "@/lib/data";
 
 export function Experience() {
   return (
@@ -33,13 +34,12 @@ export function Experience() {
                 <div className="flex flex-col gap-6">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div className="flex items-start gap-4">
-                      <div className="glass mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl">
-                        <Briefcase className="h-4 w-4 text-white/80" />
-                      </div>
+                      <CompanyAvatar role={role} />
                       <div className="flex flex-col gap-1">
                         <h3 className="text-lg font-medium text-white">
                           {role.role}
-                          <span className="text-white/55"> · {role.company}</span>
+                          <span className="text-white/55"> · </span>
+                          <CompanyName role={role} />
                         </h3>
                         <p className="text-xs text-white/50">{role.location}</p>
                       </div>
@@ -75,5 +75,45 @@ export function Experience() {
         </ol>
       </div>
     </section>
+  );
+}
+
+function CompanyAvatar({ role }: { role: ExperienceItem }) {
+  const [imgError, setImgError] = React.useState(false);
+  // Try custom logo first, then fallback to favicon tool
+  const logoSrc = (role as any).logo || (role.website ? faviconFor(role.website) : null);
+
+  return (
+    <div className="glass mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl">
+      {logoSrc && !imgError ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={logoSrc}
+          alt=""
+          aria-hidden
+          width={24}
+          height={24}
+          className="h-6 w-6 rounded-sm object-contain"
+          onError={() => setImgError(true)}
+        />
+      ) : (
+        <Briefcase className="h-5 w-5 text-white/40" />
+      )}
+    </div>
+  );
+}
+
+function CompanyName({ role }: { role: ExperienceItem }) {
+  if (!role.website) return <span className="text-white/55">{role.company}</span>;
+  return (
+    <a
+      href={role.website}
+      target="_blank"
+      rel="noreferrer"
+      className="group/link inline-flex items-center gap-1 text-white/85 underline-offset-4 transition hover:text-white hover:underline"
+    >
+      {role.company}
+      <ArrowUpRight className="h-3.5 w-3.5 opacity-50 transition group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:opacity-100" />
+    </a>
   );
 }
