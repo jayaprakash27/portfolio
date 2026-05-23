@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jayaprakash Sahoo — Portfolio
 
-## Getting Started
+A personal portfolio built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**, **Framer Motion**, and **Lenis** smooth-scroll — styled with an Apple "Liquid Glass" aesthetic.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 + React 19 (App Router, Turbopack)
+- TypeScript, Tailwind CSS v4
+- Framer Motion · Lenis · Sonner
+- React Hook Form + Zod for the contact form
+- Resend for transactional email
+- Deployed on Vercel
+
+## Run locally
 
 ```bash
+npm install
+cp .env.example .env.local   # then fill in RESEND_API_KEY (optional in dev)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> If `RESEND_API_KEY` is unset the contact API will log the payload to the server console instead of sending email — so the form still "works" in development.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Customize
 
-## Learn More
+| What | Where |
+| --- | --- |
+| Personal info, experience, projects, skills | `lib/data.ts` |
+| Hero photo | drop into `public/headshot.jpg` |
+| Resume PDF | `public/resume.pdf` |
+| Colors / glass tokens | `app/globals.css` (CSS vars + `@utility glass`) |
+| Email recipient / sender | `.env.local` (`CONTACT_RECIPIENT`, `CONTACT_SENDER`) |
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy to Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Push the repo to GitHub.
+2. Import the repo at <https://vercel.com/new>.
+3. Add environment variables (project → settings → environment variables):
+   - `RESEND_API_KEY` — from <https://resend.com/api-keys>
+   - `CONTACT_RECIPIENT` — *(optional)* your inbox
+   - `CONTACT_SENDER` — *(optional)* e.g. `"Portfolio <hello@yourdomain.com>"` after verifying a domain in Resend
+4. Deploy. You'll get a free `*.vercel.app` URL automatically.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## TODOs after first deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Add real social URLs to `lib/data.ts` (LinkedIn, GitHub, existing portfolio).
+- Drop a real headshot in `public/headshot.jpg`.
+- Verify your domain in Resend and update `CONTACT_SENDER` for production deliverability.
