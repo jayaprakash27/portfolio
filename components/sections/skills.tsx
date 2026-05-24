@@ -27,8 +27,8 @@ export function Skills() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="03 · Toolbelt"
-          title="The stack I reach for"
-          description="A working toolbox — focused on the web platform, React, and pragmatic backends."
+          title="Daily drivers"
+          description="What I actually open every day — heavy on the web platform, React, and pragmatic backends."
         />
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">

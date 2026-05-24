@@ -2,7 +2,7 @@ export const profile = {
   name: "Jayaprakash Sahoo",
   shortName: "Jay",
   role: "Software Engineer",
-  tagline: "Crafting performant, futuristic interfaces with Next.js, React & React Native.",
+  tagline: "Shipping web & mobile that feels alive. Obsessed with the small details.",
   location: "India · Remote",
   email: "jay27codes@gmail.com",
   phone: "+917735471415",
@@ -17,12 +17,12 @@ export const profile = {
 
 export const about = {
   body:
-    "I'm a software engineer building production-grade web and mobile experiences. Currently engineering the Saudi Genomics Database platform at Enigma Genomics — shipping fast, accessible interfaces with Next.js and TypeScript. I'm into kinetic typography, spatial UI, and the small details that make software feel alive.",
+    "Software engineer shipping web & mobile, fast. I live in TypeScript — mostly Next.js and React Native — and deploy to prod daily. Lowkey obsessed with kinetic type, spatial UI, and the tiny details that make software feel alive.",
   highlights: [
-    { label: "Years building", value: "3+" },
-    { label: "Primary stack", value: "Next.js · TS" },
-    { label: "Mobile", value: "React Native" },
-    { label: "Based in", value: "India" },
+    { label: "Shipping since", value: "2023" },
+    { label: "Daily driver", value: "Next.js · TS" },
+    { label: "Mobile", value: "React Native + Expo" },
+    { label: "Remote from", value: "India" },
   ],
 } as const;
 
@@ -85,7 +85,7 @@ export const experience: Experience[] = [
     start: "Nov 2023",
     end: "Mar 2024",
     location: "Bengaluru, India · Remote",
-    website: "https://piggyride-online-kids-classes.en.softonic.com/android?ex=RAMP-4410.1&rex=true", // TODO: confirm correct URL
+    website: "https://www.linkedin.com/company/piggy-ride/", // TODO: confirm correct URL
     bullets: [
       "Upgraded PiggyRide's ride-tracking platform by migrating from static HTML/CSS to a 3D React app using Google Maps JS API, Three.js, Redux, and Tailwind CSS.",
       "Modified the ride-request page (Java Play framework) to introduce the PiggyPass subscription model.",
@@ -100,12 +100,13 @@ export const experience: Experience[] = [
     start: "Mar 2023",
     end: "Oct 2023",
     location: "Bengaluru, India · Remote",
-    website: "https://www.louverlineblinds.com", // TODO: confirm correct URL
+    website: "https://www.louverlineblinds.com",
     bullets: [
       "Orchestrated development of the My Louverline website, giving 120 authorized dealers real-time access to product data, pricing, and stock.",
       "Implemented a streamlined online ordering system — 30% faster processing, saving the ops team 12 hours/week.",
     ],
     stack: ["React.js", "Google Apps Script", "Firebase", "Tailwind CSS"],
+    logo: "/logos/louverline.png",
   },
 ];
 

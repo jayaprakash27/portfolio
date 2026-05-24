@@ -13,7 +13,7 @@ export function Experience() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="02 · Career"
-          title="Where I've been building"
+          title="Where I've shipped"
           description="A few of the teams I've shipped product with."
         />
 

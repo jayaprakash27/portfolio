@@ -14,8 +14,8 @@ export function Projects() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="04 · Work"
-          title="Selected projects"
-          description="Personal builds — small, focused experiments I shipped on the side."
+          title="Side quests"
+          description="Things I built for fun that ended up shipping."
         />
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">

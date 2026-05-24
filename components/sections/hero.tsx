@@ -32,7 +32,7 @@ export function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
             </span>
-            Available for opportunities
+            open to interesting work
           </motion.div>
 
           <div className="flex flex-col gap-2">
@@ -43,7 +43,7 @@ export function Hero() {
             />
             <AnimatedText
               as="h2"
-              text="Software Engineer building futuristic, performant interfaces."
+              text="Software engineer shipping interfaces that feel alive."
               delay={0.2}
               stagger={0.025}
               className="text-gradient-accent max-w-2xl text-[clamp(1.05rem,2.5vw,1.5rem)] font-medium leading-tight"
@@ -56,8 +56,8 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="max-w-xl text-base leading-relaxed text-white/65"
           >
-            {profile.tagline} Currently engineering the Saudi Genomics Database
-            at <span className="text-white/90">Enigma Genomics</span>.
+            {profile.tagline} Currently shipping production interfaces remotely
+            — TypeScript first, Next.js + React Native, deployed on the edge.
           </motion.p>
 
           <motion.div
@@ -67,7 +67,7 @@ export function Hero() {
             className="flex flex-wrap items-center gap-3"
           >
             <MagneticButton href="#contact">
-              Let&apos;s build something
+              Let&apos;s ship something
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </MagneticButton>
             <MagneticButton
@@ -76,7 +76,7 @@ export function Hero() {
               target="_blank"
               onClick={() => unlock("bookworm")}
             >
-              View Résumé
+              Grab the résumé
             </MagneticButton>
           </motion.div>
 
@@ -143,14 +143,14 @@ export function Hero() {
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             className="glass absolute -left-6 top-10 hidden rounded-2xl px-3 py-2 text-xs text-white/85 sm:block"
           >
-            <span className="font-mono">$ npm run ship</span>
+            <span className="font-mono">$ pnpm dlx vibe</span>
           </motion.div>
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             className="glass absolute -right-4 bottom-12 hidden rounded-2xl px-3 py-2 text-xs text-white/85 sm:block"
           >
-            ✦ Building with Next.js 16
+            ✦ shipped with Next.js 16
           </motion.div>
         </motion.div>
       </div>

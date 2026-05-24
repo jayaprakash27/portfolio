@@ -77,8 +77,8 @@ export function Contact() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading
           eyebrow="06 · Contact"
-          title="Let's build something together"
-          description="Have a role, a project, or just want to chat about the web? Drop a line."
+          title="Let's ship something"
+          description="Got a role, a project, or just want to talk shop? Drop a line."
         />
 
         <div className="mt-12 grid gap-6 md:grid-cols-[1fr_1.3fr]">
