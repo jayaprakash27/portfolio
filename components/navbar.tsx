@@ -6,11 +6,33 @@ import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks, profile } from "@/lib/data";
+import { useAchievements } from "@/components/gamification/achievements-provider";
 
 export function Navbar() {
   const [open, setOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
   const { scrollY } = useScroll();
+  const { unlock } = useAchievements();
+
+  // Triple-click on the JS monogram — fires Curious + spawns cursor orb.
+  const tripleClickRef = React.useRef<{ count: number; timer: number | null }>({
+    count: 0,
+    timer: null,
+  });
+  const handleMonogramClick = React.useCallback(() => {
+    const state = tripleClickRef.current;
+    state.count += 1;
+    if (state.timer) window.clearTimeout(state.timer);
+    state.timer = window.setTimeout(() => {
+      state.count = 0;
+      state.timer = null;
+    }, 600);
+    if (state.count >= 3) {
+      state.count = 0;
+      unlock("curious");
+      window.dispatchEvent(new CustomEvent("ach:cursor-orb-on"));
+    }
+  }, [unlock]);
 
   useMotionValueEvent(scrollY, "change", (y) => {
     setScrolled(y > 24);
@@ -33,7 +55,11 @@ export function Navbar() {
           href="#top"
           className="flex items-center gap-2 pl-2 text-sm font-medium tracking-tight"
         >
-          <span className="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-accent-a via-accent-b to-accent-c text-[10px] font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.4)]">
+          <span
+            onClick={handleMonogramClick}
+            className="relative inline-flex h-7 w-7 cursor-pointer items-center justify-center rounded-full bg-gradient-to-br from-accent-a via-accent-b to-accent-c text-[10px] font-semibold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.4)] transition-transform active:scale-90"
+            aria-label="JS monogram (try triple-clicking)"
+          >
             JS
           </span>
           <span className="hidden sm:inline text-white/90">Jayaprakash</span>

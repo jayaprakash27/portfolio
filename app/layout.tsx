@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { LenisProvider } from "@/components/ui/lenis-provider";
+import { AchievementsProvider } from "@/components/gamification/achievements-provider";
+import { AchievementsBadge } from "@/components/gamification/achievements-badge";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -73,19 +75,22 @@ export default function RootLayout({
       </head>
       <body className="relative min-h-full">
         <LenisProvider>
-          {children}
-          <Toaster
-            theme="dark"
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background: "rgba(20, 20, 28, 0.7)",
-                backdropFilter: "blur(20px) saturate(160%)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                color: "white",
-              },
-            }}
-          />
+          <AchievementsProvider>
+            {children}
+            <AchievementsBadge />
+            <Toaster
+              theme="dark"
+              position="bottom-right"
+              toastOptions={{
+                style: {
+                  background: "rgba(20, 20, 28, 0.7)",
+                  backdropFilter: "blur(20px) saturate(160%)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "white",
+                },
+              }}
+            />
+          </AchievementsProvider>
         </LenisProvider>
       </body>
     </html>

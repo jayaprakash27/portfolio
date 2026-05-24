@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { GlassCard } from "@/components/ui/glass-card";
 import { SectionHeading } from "@/components/sections/_heading";
 import { projects, screenshotFor, type Project } from "@/lib/data";
+import { projectHoverEvent } from "@/components/gamification/achievements-provider";
 
 export function Projects() {
   return (
@@ -32,6 +33,7 @@ export function Projects() {
                 delay: i * 0.1,
                 ease: [0.22, 1, 0.36, 1],
               }}
+              onMouseEnter={() => window.dispatchEvent(projectHoverEvent(p.name))}
               className="group block"
             >
               <GlassCard className="relative h-full overflow-hidden p-0">

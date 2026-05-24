@@ -7,9 +7,11 @@ import { MeshGradient } from "@/components/ui/mesh-gradient";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { profile } from "@/lib/data";
+import { useAchievements } from "@/components/gamification/achievements-provider";
 
 export function Hero() {
   const [imgOk, setImgOk] = React.useState(true);
+  const { unlock } = useAchievements();
   return (
     <section
       id="top"
@@ -68,7 +70,12 @@ export function Hero() {
               Let&apos;s build something
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </MagneticButton>
-            <MagneticButton href={profile.resumeUrl} variant="ghost" target="_blank">
+            <MagneticButton
+              href={profile.resumeUrl}
+              variant="ghost"
+              target="_blank"
+              onClick={() => unlock("bookworm")}
+            >
               View Résumé
             </MagneticButton>
           </motion.div>

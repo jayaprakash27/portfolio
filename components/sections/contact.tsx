@@ -12,6 +12,10 @@ import { SectionHeading } from "@/components/sections/_heading";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { profile } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import {
+  PREFILL_CONTACT_EVENT_NAME,
+  useAchievements,
+} from "@/components/gamification/achievements-provider";
 
 const schema = z.object({
   name: z.string().min(2, "Please share your name."),
@@ -22,14 +26,31 @@ const schema = z.object({
 type FormValues = z.infer<typeof schema>;
 
 export function Contact() {
+  const { unlock } = useAchievements();
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
+    setFocus,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
+
+  // Listen for the `sudo hire-me` easter egg → pre-fill message.
+  React.useEffect(() => {
+    const handler = (raw: Event) => {
+      const e = raw as CustomEvent<{ message: string }>;
+      if (e.detail?.message) {
+        setValue("message", e.detail.message, { shouldDirty: true, shouldTouch: true });
+        // Move the cursor into the name field so the visitor can keep typing.
+        setTimeout(() => setFocus("name"), 250);
+      }
+    };
+    window.addEventListener(PREFILL_CONTACT_EVENT_NAME, handler as EventListener);
+    return () => window.removeEventListener(PREFILL_CONTACT_EVENT_NAME, handler as EventListener);
+  }, [setValue, setFocus]);
 
   async function onSubmit(values: FormValues) {
     try {
@@ -43,6 +64,7 @@ export function Contact() {
         throw new Error(data.error || "Something went wrong");
       }
       toast.success("Message sent — I'll be in touch soon.");
+      unlock("reaching_out");
       reset();
     } catch (err) {
       const message = err instanceof Error ? err.message : "Failed to send";

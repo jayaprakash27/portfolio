@@ -149,6 +149,28 @@ body {
   will-change: transform;
 }
 
+/* ===== Party mode (triggered by Konami code) ===== */
+@keyframes party-hue {
+  0% {
+    filter: blur(80px) hue-rotate(0deg) saturate(1.4);
+  }
+  100% {
+    filter: blur(80px) hue-rotate(360deg) saturate(1.4);
+  }
+}
+html[data-party="true"] .blob {
+  animation: party-hue 1.5s linear infinite !important;
+}
+@keyframes party-tilt {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(0.8deg); }
+  75% { transform: rotate(-0.8deg); }
+}
+html[data-party="true"] main {
+  animation: party-tilt 1.2s ease-in-out infinite;
+  transform-origin: center top;
+}
+
 /* Subtle hairline divider */
 .hairline {
   height: 1px;
