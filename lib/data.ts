@@ -2,7 +2,7 @@ export const profile = {
   name: "Jayaprakash Sahoo",
   shortName: "Jay",
   role: "Software Engineer",
-  tagline: "Shipping web & mobile that feels alive. Obsessed with the small details.",
+  tagline: "Software engineer shipping interfaces that feel alive.",
   location: "India · Remote",
   email: "jay27codes@gmail.com",
   phone: "+917735471415",
@@ -174,13 +174,31 @@ export function screenshotFor(url: string | undefined): string | null {
 
 export const projects: Project[] = [
   {
+    name: "Meel",
+    blurb: "Logistics platform — site + admin panel",
+    description:
+      "A logistics platform: the public site at trymeel.com and the internal admin panel that runs the operation. Vite + TypeScript on the dashboard side, React muscle memory throughout.",
+    stack: ["Vite", "TypeScript", "React", "Tailwind CSS"],
+    href: "https://trymeel.com",
+    accent: "from-emerald-400/40 via-teal-400/30 to-cyan-500/40",
+  },
+  {
+    name: "My Louverline",
+    blurb: "Dealer ordering portal for Louverline Blinds",
+    description:
+    "An ordering and inventory portal serving 120+ authorized dealers — real-time products, pricing, and stock. React + Tailwind on the front, Firebase Auth + Firestore on the back. Shipped solo, end to end.",
+    stack: ["React", "Tailwind CSS", "Firebase", "Firestore"],
+    href: "https://mylouverline.com", // private dealer portal — no public URL
+    accent: "from-rose-400/40 via-fuchsia-400/30 to-violet-500/40",
+  },
+  {
     name: "Petu",
     blurb: "Restaurant delivery web app",
     description:
-      "A delightful restaurant delivery experience with a captivating frontend in React + Redux + Tailwind, backed by Firebase for auth and data.",
+    "A delightful restaurant delivery experience with a captivating frontend in React + Redux + Tailwind, backed by Firebase for auth and data.",
     stack: ["React", "Redux", "Tailwind", "Firebase"],
-    href: "https://petu.netlify.app/", // TODO: live link
-    accent: "from-rose-400/40 via-fuchsia-400/30 to-violet-500/40",
+    href: "https://petu.netlify.app/",
+    accent: "from-amber-400/40 via-orange-400/30 to-yellow-500/40",
   },
   {
     name: "Vide",
@@ -188,7 +206,7 @@ export const projects: Project[] = [
     description:
       "A video-sharing app built with React Native, Expo & Nativewind on the frontend, and Appwrite for backend and authentication.",
     stack: ["React Native", "Expo", "Nativewind", "Appwrite"],
-    href: "https://vide-app.netlify.app/", // TODO: repo / store link
+    href: "",
     accent: "from-cyan-400/40 via-sky-400/30 to-indigo-500/40",
   },
 ];

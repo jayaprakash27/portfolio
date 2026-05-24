@@ -43,7 +43,7 @@ export function Hero() {
             />
             <AnimatedText
               as="h2"
-              text="Software engineer shipping interfaces that feel alive."
+              text={profile.tagline}
               delay={0.2}
               stagger={0.025}
               className="text-gradient-accent max-w-2xl text-[clamp(1.05rem,2.5vw,1.5rem)] font-medium leading-tight"
@@ -56,8 +56,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.5 }}
             className="max-w-xl text-base leading-relaxed text-white/65"
           >
-            {profile.tagline} Currently shipping production interfaces remotely
-            — TypeScript first, Next.js + React Native, deployed on the edge.
+            Mostly TypeScript. Next.js for web, React Native + Expo on mobile,
+            Vercel for deploys. Work remote, ship async, and yeah — I&apos;ve burned
+            a Saturday on an easing curve before.
           </motion.p>
 
           <motion.div
