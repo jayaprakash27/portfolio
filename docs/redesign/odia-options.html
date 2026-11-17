@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Odia theme options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@900&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Option A — Jhoti: today's Night Shift, warmed to mud-floor black and
+     rice-paste white; lime stays; white jhoti line ornaments. */
+  body[data-opt="a"] { --bg:#110F0C; --fg:#F3EBDD; --muted:#A39A8B; --line:rgb(243 235 221 / .14); --card:#1A1713; --accent:#C6F432; --on:#110F0C; --accent2:#F3EBDD; }
+  /* Option B — Pattachitra: lamp-soot black, conch white, haritala yellow
+     accent, hingula red as a rare second accent; double-line borders. */
+  body[data-opt="b"] { --bg:#15110D; --fg:#F4EDE0; --muted:#B0A391; --line:rgb(244 237 224 / .16); --card:#1E1913; --accent:#E9B53A; --on:#15110D; --accent2:#C8442F; }
+  /* Option C — Sambalpuri: black, white and red of the bandha saree;
+     stepped ikat bands. */
+  body[data-opt="c"] { --bg:#0D0C0C; --fg:#F2EEE8; --muted:#9E9893; --line:rgb(242 238 232 / .14); --card:#171515; --accent:#D8372F; --on:#FFFFFF; --accent2:#F2EEE8; }
+
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family:"Geist",system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  .mono { font-family:"Geist Mono",monospace; }
+  .display { font-family:"Big Shoulders",sans-serif; font-weight:900; text-transform:uppercase; line-height:.9; letter-spacing:-.01em; margin:0; }
+  .wrap { max-width:1120px; margin:0 auto; padding:0 16px; }
+
+  .switch { position:sticky; top:0; z-index:9; background:var(--bg); border-bottom:1px solid var(--line); }
+  .switch .wrap { display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding-top:10px; padding-bottom:10px; }
+  .switch .lbl { margin-right:auto; font-size:12px; color:var(--muted); }
+  .switch button { font:500 13px "Geist Mono",monospace; background:transparent; color:var(--fg); border:1px solid var(--line); border-radius:999px; padding:6px 14px; cursor:pointer; }
+  .switch button[aria-pressed="true"] { background:var(--accent); color:var(--on); border-color:var(--accent); }
+
+  .intro { padding:28px 0 0; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:20px; align-items:end; }
+  .intro h2 { margin:0 0 6px; font:600 22px "Geist",sans-serif; }
+  .intro p { margin:0; color:var(--muted); line-height:1.55; max-width:64ch; }
+  .sw { display:flex; gap:6px; }
+  .sw div { width:46px; height:46px; border-radius:10px; border:1px solid var(--line); display:flex; align-items:end; padding:4px; font:10px "Geist Mono",monospace; }
+
+  .hero { padding:56px 0 40px; }
+  .hero .eyebrow { color:var(--muted); letter-spacing:.14em; font-size:14px; margin-bottom:18px; }
+  .hero h1 { font-size:clamp(56px, 11vw, 150px); }
+  .hero .hl { color:var(--accent); }
+  .hero p { color:var(--muted); max-width:46ch; font-size:18px; line-height:1.5; margin:22px 0 0; }
+
+  .orn { display:block; width:100%; height:44px; color:var(--fg); }
+  .orn.accent { color:var(--accent); }
+
+  .row { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,420px); gap:40px; align-items:center; padding:48px 0; }
+  .row h2 { font-size:clamp(40px,6vw,84px); }
+  .note { color:var(--muted); font-size:15px; line-height:1.6; margin-top:14px; }
+  .note b { color:var(--fg); font-weight:500; }
+
+  .card { position:relative; background:var(--card); border-radius:24px; padding:22px; }
+  body[data-opt="a"] .card { border:1px solid var(--line); }
+  /* Pattachitra: double rule with a band of small motifs between */
+  body[data-opt="b"] .card { border:2px solid var(--accent); outline:1px solid var(--accent); outline-offset:-10px; padding:30px; border-radius:6px; }
+  body[data-opt="c"] .card { border:1px solid var(--line); border-top:0; border-radius:0 0 18px 18px; }
+  .card .ikat-top { display:none; }
+  body[data-opt="c"] .card .ikat-top { display:block; position:absolute; left:-1px; right:-1px; top:-14px; height:14px; }
+  .head { display:flex; gap:14px; align-items:center; }
+  .icon { width:58px; height:58px; border-radius:14px; background:var(--accent); color:var(--on); display:grid; place-items:center; font:900 26px "Big Shoulders"; }
+  body[data-opt="b"] .icon { border-radius:4px; }
+  .head h3 { margin:0; font-size:17px; } .head p { margin:2px 0 0; font-size:13px; color:var(--muted); }
+  .get { margin-left:auto; background:var(--accent); color:var(--on); border:0; border-radius:999px; padding:8px 18px; font:600 14px "Geist"; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:18px 0; text-align:center; }
+  .stats div { padding:12px 4px; } .stats div+div { border-left:1px solid var(--line); }
+  .stats b { display:block; font-size:18px; } .stats span { font-size:11px; color:var(--muted); }
+  .chip { display:inline-flex; gap:6px; align-items:center; border:1px solid var(--line); border-radius:999px; padding:6px 12px; font:12px "Geist Mono"; margin:4px 4px 0 0; }
+  .chip.red { border-color:var(--accent2); color:var(--accent2); }
+
+  .story { border-top:1px solid var(--line); padding:28px 0 60px; color:var(--muted); line-height:1.6; font-size:15px; }
+  .story b { color:var(--fg); font-weight:500; }
+
+  @media (max-width: 820px) { .row, .intro { grid-template-columns:minmax(0,1fr); } }
+</style>
+</head>
+<body data-opt="a">
+
+<!-- Shared SVG ornaments, drawn in currentColor -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Jhoti: white rice-paste line art — scalloped petals, dots, a creeper -->
+    <pattern id="jhoti" width="64" height="44" patternUnits="userSpaceOnUse">
+      <path d="M0 22 Q16 4 32 22 T64 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M0 22 Q16 40 32 22 T64 22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+      <circle cx="16" cy="22" r="2.6" fill="currentColor"/>
+      <circle cx="48" cy="22" r="2.6" fill="currentColor"/>
+      <circle cx="32" cy="8" r="1.4" fill="currentColor"/>
+      <circle cx="32" cy="36" r="1.4" fill="currentColor"/>
+    </pattern>
+    <!-- Pattachitra border band: twin rules with a row of leaf/triangle motifs -->
+    <pattern id="patta" width="28" height="44" patternUnits="userSpaceOnUse">
+      <rect x="0" y="6" width="28" height="2" fill="currentColor"/>
+      <rect x="0" y="36" width="28" height="2" fill="currentColor"/>
+      <path d="M14 13 L21 22 L14 31 L7 22 Z" fill="none" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="14" cy="22" r="1.8" fill="currentColor"/>
+      <circle cx="0" cy="22" r="1.2" fill="currentColor"/>
+    </pattern>
+    <!-- Sambalpuri ikat: stepped diamonds; uneven steps mimic the bandha bleed -->
+    <pattern id="ikat" width="40" height="44" patternUnits="userSpaceOnUse">
+      <g fill="currentColor">
+        <rect x="18" y="6" width="5" height="4"/>
+        <rect x="14" y="10" width="12" height="4"/>
+        <rect x="9" y="14" width="21" height="4"/>
+        <rect x="5" y="18" width="30" height="5"/>
+        <rect x="10" y="23" width="20" height="4"/>
+        <rect x="14" y="27" width="11" height="4"/>
+        <rect x="17" y="31" width="5" height="4"/>
+        <rect x="0" y="20" width="2" height="2" opacity=".6"/>
+        <rect x="38" y="21" width="2" height="2" opacity=".6"/>
+      </g>
+    </pattern>
+    <!-- Smaller red ikat band for the top edge of the card (option C) -->
+    <pattern id="ikatband" patternTransform="scale(0.32)" width="40" height="44" patternUnits="userSpaceOnUse">
+      <g fill="var(--accent)">
+        <rect x="18" y="6" width="5" height="4"/>
+        <rect x="14" y="10" width="12" height="4"/>
+        <rect x="9" y="14" width="21" height="4"/>
+        <rect x="5" y="18" width="30" height="5"/>
+        <rect x="10" y="23" width="20" height="4"/>
+        <rect x="14" y="27" width="11" height="4"/>
+        <rect x="17" y="31" width="5" height="4"/>
+        <rect x="0" y="20" width="2" height="2" opacity=".6"/>
+        <rect x="38" y="21" width="2" height="2" opacity=".6"/>
+      </g>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="switch">
+  <div class="wrap">
+    <span class="lbl mono">Odia theme options · press 1 / 2 / 3</span>
+    <button data-pick="a" aria-pressed="true">A · Jhoti</button>
+    <button data-pick="b" aria-pressed="false">B · Pattachitra</button>
+    <button data-pick="c" aria-pressed="false">C · Sambalpuri</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="intro">
+    <div><h2 id="name"></h2><p id="desc"></p></div>
+    <div class="sw" id="sw"></div>
+  </section>
+
+  <section class="hero">
+    <div class="eyebrow mono">REACT NATIVE · NEXT.JS ENGINEER</div>
+    <h1 class="display">I <span class="hl">ship</span> to the stores. And the browser.</h1>
+    <p>Hi, I'm Jay. React Native for phones, Next.js for the web, one TypeScript brain for both.</p>
+  </section>
+
+  <svg class="orn" id="divider" aria-hidden="true"><rect width="100%" height="100%" id="divfill"/></svg>
+
+  <section class="row">
+    <div>
+      <span class="mono" style="font-size:12px;color:var(--muted)">THE SHORT VERSION</span>
+      <h2 class="display" style="margin-top:12px">Everything, in one card.</h2>
+      <p class="note" id="where"></p>
+    </div>
+    <article class="card">
+      <svg class="ikat-top" aria-hidden="true" style="color:var(--accent)"><rect width="100%" height="100%" fill="url(#ikatband)"/></svg>
+      <div class="head">
+        <div class="icon">JS</div>
+        <div><h3>Jayaprakash Sahoo</h3><p>React Native &amp; Next.js Engineer</p></div>
+        <button class="get">Get</button>
+      </div>
+      <div class="stats">
+        <div><b>2 yrs</b><span>full-time</span></div>
+        <div><b>1 app</b><span>live in stores</span></div>
+        <div><b>1,378</b><span>exomes · Next.js</span></div>
+      </div>
+      <span class="chip">App Store ↗</span><span class="chip">Google Play ↗</span>
+      <span class="chip red" id="madein">Made in Nayagarh</span>
+    </article>
+  </section>
+
+  <svg class="orn accent" id="divider2" aria-hidden="true"><rect width="100%" height="100%" id="divfill2"/></svg>
+
+  <section class="story" id="story"></section>
+</div>
+
+<script>
+  const OPTS = {
+    a: {
+      name: "A · Jhoti (smallest change)",
+      desc: "Keeps Night Shift and the lime accent. The black warms slightly toward a mud floor, the white toward rice paste, and white jhoti line art becomes the section divider. Odia in spirit, still clearly 'you'.",
+      sw: [["#110F0C","mud"],["#F3EBDD","rice paste"],["#C6F432","lime"]],
+      orn: "jhoti",
+      where: "Where it shows: <b>section dividers and the footer</b> get jhoti line art. Cards and type stay as they are.",
+      story: "<b>The story it tells:</b> Jhoti / chita are white rice-paste drawings Odia women make on dark mud floors and walls, especially in the month of Margasira. White line art on a dark ground: <b>Odisha's original dark mode.</b> That line could live in the footer next to “Made in Nayagarh”."
+    },
+    b: {
+      name: "B · Pattachitra (most Odia)",
+      desc: "Swaps lime for haritala yellow and adds hingula red as a rare second accent, both real Pattachitra pigments. Cards get the painting's signature double border, and dividers become pattachitra motif bands.",
+      sw: [["#15110D","lamp soot"],["#F4EDE0","conch white"],["#E9B53A","haritala"],["#C8442F","hingula"]],
+      orn: "patta",
+      where: "Where it shows: <b>accent colour site-wide</b>, double-rule borders on the App Store card and phone frames, motif bands as dividers.",
+      story: "<b>The story it tells:</b> Raghurajpur's pattachitra painters make their own colours: white from conch shells, black from lamp soot, red from hingula stone, yellow from haritala. <b>A palette with a 2,000-year spec sheet.</b> Trade-off: the yellow is warmer and less 'tech' than lime, and hingula sits close to Louverline red, so that scene's red would be reserved for Louverline only."
+    },
+    c: {
+      name: "C · Sambalpuri (boldest)",
+      desc: "Black, white and red: the palette of the Sambalpuri bandha saree. Red becomes the accent, and stepped ikat bands frame cards and dividers.",
+      sw: [["#0D0C0C","black"],["#F2EEE8","white"],["#D8372F","sindoor red"]],
+      orn: "ikat",
+      where: "Where it shows: <b>red accent site-wide</b>, ikat bands on card tops and dividers.",
+      story: "<b>The story it tells:</b> You studied in Burla, in Sambalpur district, home of bandha ikat, where yarn is tie-dyed <i>before</i> weaving, which gives the patterns their soft stepped edges. Trade-off: red as the main accent reads as 'error' in UI conventions, clashes with Louverline's red, and is the hardest to keep calm."
+    }
+  };
+  function pick(k){
+    const o=OPTS[k]; document.body.dataset.opt=k;
+    document.querySelectorAll("[data-pick]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.pick===k));
+    document.getElementById("name").textContent=o.name;
+    document.getElementById("desc").textContent=o.desc;
+    document.getElementById("where").innerHTML=o.where;
+    document.getElementById("story").innerHTML=o.story;
+    document.getElementById("sw").innerHTML=o.sw.map(([c,l])=>`<div style="background:${c};color:${['#110F0C','#15110D','#0D0C0C','#C8442F','#D8372F'].includes(c)?'#fff':'#111'}">${l}</div>`).join("");
+    for (const id of ["divfill","divfill2"]) document.getElementById(id).setAttribute("fill",`url(#${o.orn})`);
+  }
+  document.querySelectorAll("[data-pick]").forEach(b=>b.onclick=()=>pick(b.dataset.pick));
+  addEventListener("keydown",e=>{const m={"1":"a","2":"b","3":"c"}[e.key]; if(m) pick(m);});
+  pick("a");
+</script>
+</body>
+</html>

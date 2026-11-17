@@ -6,6 +6,7 @@ import { useMotionValueEvent, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { navLinks, profile } from "@/lib/data";
+import { KonarkWheel } from "@/components/konark-wheel";
 
 /**
  * Night Shift top bar: name on the left, section links in the middle,
@@ -40,7 +41,7 @@ export function Navbar() {
           <span className="hidden sm:inline">{profile.name.toUpperCase()}</span>
         </Link>
 
-        <ul className="ml-auto hidden items-center gap-6 md:flex">
+        <ul className="ml-auto hidden items-center gap-6 lg:flex">
           {navLinks.map((l) => (
             <li key={l.href}>
               <Link href={l.href} className="font-mono text-xs uppercase tracking-[0.08em] text-muted transition-colors hover:text-fg">
@@ -50,10 +51,11 @@ export function Navbar() {
           ))}
         </ul>
 
-        <div className="ml-auto flex items-center gap-2 md:ml-0">
+        <div className="ml-auto flex items-center gap-2 lg:ml-0">
+          <KonarkWheel />
           <Link
             href="#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 font-mono text-xs text-fg transition-colors hover:border-accent"
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-line px-3 py-1.5 font-mono text-xs text-fg transition-colors hover:border-accent"
           >
             <span className="status-dot" aria-hidden />
             {profile.status}
@@ -72,7 +74,7 @@ export function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-line text-fg md:hidden"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-line text-fg lg:hidden"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -80,7 +82,7 @@ export function Navbar() {
       </nav>
 
       {open && (
-        <ul id="mobile-menu" className="mx-auto flex max-w-6xl flex-col px-4 pb-4 md:hidden">
+        <ul id="mobile-menu" className="mx-auto flex max-w-6xl flex-col px-4 pb-4 lg:hidden">
           {navLinks.map((l) => (
             <li key={l.href} className="border-t border-line">
               <Link

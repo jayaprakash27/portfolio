@@ -92,6 +92,275 @@ html {
   letter-spacing: -0.01em;
 }
 
+/* ===== Hero "ship" fun-fact hint =====
+   A small tag above the word ("click for a fun fact") with a tiny boat and a
+   hooked arrow pointing down at it. Click only. */
+.ship-word__btn {
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+}
+.ship-word__hint {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 52%;
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 6px;
+  white-space: nowrap;
+  font: 500 11px/1 var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  cursor: pointer;
+}
+.ship-word__hint-arrow {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transform: translateY(9px);
+}
+.ship-word__hint-boat {
+  width: 18px;
+  height: auto;
+  flex-shrink: 0;
+  animation: boat-bob 2.4s ease-in-out infinite;
+}
+.ship-word__hint:hover span,
+.ship-word__btn:hover + .ship-word__hint span {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@keyframes boat-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-2px) rotate(4deg);
+  }
+}
+
+/* ===== The "ship" scene: a night sea =====
+   Sky with a crescent moon and twinkling stars; three layers of rolling lime
+   waves at different strengths and speeds; a boita sailing between them. */
+.ship-scene {
+  background: var(--bg);
+}
+.ship-scene__sky {
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 82%, #23306e), var(--bg) 70%);
+}
+.ship-scene__moon {
+  width: clamp(56px, 9vw, 112px);
+  top: 9%;
+  right: 11%;
+}
+@media (max-width: 640px) {
+  /* Phones: smaller, top-left, clear of the headline and the close button. */
+  .ship-scene__moon {
+    width: 44px;
+    top: 3.5%;
+    right: auto;
+    left: 6%;
+  }
+}
+.ship-scene__star {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+@keyframes twinkle {
+  50% {
+    opacity: 0.15;
+  }
+}
+.ship-scene__wave {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+/* Every layer runs to the bottom edge, so no flat seams show between them. */
+.ship-scene__wave--back {
+  bottom: 0;
+  height: 86%;
+}
+.ship-scene__wave--mid {
+  bottom: 0;
+  height: 64%;
+}
+.ship-scene__wave--front {
+  bottom: 0;
+  height: 40%;
+}
+.ship-scene__wave-track {
+  display: block;
+  width: 200%;
+  height: 100%;
+  animation: wave-scroll linear infinite;
+}
+@keyframes wave-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ship-scene__boat {
+  position: absolute;
+  width: clamp(56px, 8vw, 112px);
+  height: auto;
+  bottom: 39%; /* seated on the middle wave's crest */
+  left: -15%;
+  animation:
+    scene-sail 22s linear infinite,
+    boat-bob 2.6s ease-in-out infinite;
+}
+@keyframes scene-sail {
+  from {
+    left: -15%;
+  }
+  to {
+    left: 110%;
+  }
+}
+
+/* ===== The "Nayagada" scene: the overnight bake =====
+   A faint oven glow from below, a chhena poda on a sal leaf, steam once the
+   clock reaches morning. */
+.chhena-scene {
+  background: linear-gradient(to top, color-mix(in srgb, var(--bg) 78%, #8a4f1c), var(--bg) 62%);
+}
+.chhena-scene__cake {
+  width: min(78vw, 360px);
+  height: auto;
+}
+.chhena-scene__steam path {
+  opacity: 0;
+}
+.chhena-scene__steam.is-on path {
+  animation: steam-rise 2.4s ease-out infinite;
+}
+@keyframes steam-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  35% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ship-word__hint-boat,
+  .ship-scene__star,
+  .ship-scene__wave-track {
+    animation: none;
+  }
+  .ship-scene__boat {
+    animation: none;
+    left: 38%;
+  }
+  .chhena-scene__steam.is-on path {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
+/* ===== Dot + ring cursor (components/dot-ring-cursor.tsx) =====
+   Native cursor hidden only once the custom one has mounted; text fields
+   keep the native I-beam. The ring's size changes on an inner element so
+   the outer transform (position) stays free for JS. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+html.has-custom-cursor input:not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]),
+html.has-custom-cursor textarea,
+html.has-custom-cursor [contenteditable="true"] {
+  cursor: text !important;
+}
+.dr-cursor__dot,
+.dr-cursor__ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  pointer-events: none;
+  will-change: transform;
+}
+.dr-cursor__dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 1.5px var(--bg);
+  transition: opacity 0.15s;
+}
+.dr-cursor__shape {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1.5px solid var(--fg);
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.25);
+  transition:
+    width 0.2s ease,
+    height 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    scale 0.12s ease;
+}
+.dr-cursor__icon {
+  position: absolute;
+  width: 34px;
+  height: auto;
+  opacity: 0;
+  scale: 0.6;
+  transition:
+    opacity 0.2s ease,
+    scale 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dr-cursor[data-mode="link"] .dr-cursor__shape {
+  width: 54px;
+  height: 54px;
+  border-color: var(--accent);
+  background-color: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+.dr-cursor[data-mode="ship"] .dr-cursor__shape,
+.dr-cursor[data-mode="cake"] .dr-cursor__shape {
+  width: 44px;
+  height: 44px;
+  border-color: transparent;
+  box-shadow: none;
+}
+.dr-cursor[data-mode="ship"] .dr-cursor__icon--ship,
+.dr-cursor[data-mode="cake"] .dr-cursor__icon--cake {
+  opacity: 1;
+  scale: 1;
+}
+.dr-cursor[data-mode="ship"] .dr-cursor__dot,
+.dr-cursor[data-mode="cake"] .dr-cursor__dot {
+  opacity: 0;
+}
+.dr-cursor[data-mode="text"],
+.dr-cursor[data-mode="hidden"] {
+  visibility: hidden;
+}
+.dr-cursor[data-pressed] .dr-cursor__shape {
+  scale: 0.85;
+}
+
 /* ===== Hero entrance =====
    Pure CSS so it starts with the HTML, not after JavaScript hydrates.
    Each element sets --hero-delay inline for the word-by-word stagger. */

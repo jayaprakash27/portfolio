@@ -10,6 +10,7 @@
 export const profile = {
   name: "Jayaprakash Sahoo",
   shortName: "Jay",
+  hometown: "Nayagada",
   role: "React Native & Next.js Engineer",
   /** Small mono line above the hero headline. */
   eyebrow: "React Native · Next.js engineer",
@@ -413,7 +414,7 @@ export const projects: Project[] = [
     name: "Petu",
     blurb: "Restaurant delivery web app",
     description: "A restaurant delivery web app in React, Redux and Tailwind CSS, with Firebase for auth and data.",
-    quip: "Named after what I am. Built while hungry.",
+    quip: "Browse restaurants, fill a cart, check out. Designed to make you hungry before the last step.",
     stack: ["React", "Redux", "Tailwind CSS", "Firebase"],
     href: "https://petu.netlify.app/",
     accent: "from-amber-400/40 via-orange-400/30 to-yellow-500/40",

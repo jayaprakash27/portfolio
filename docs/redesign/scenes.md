@@ -183,7 +183,7 @@ The phone is the stage. Five beats, each with its own headline block on the left
 ### 7 · Side projects
 Card-sized touches only, no stage.
 - **Meel** *(keep? — open question 3)*: logistics site + admin panel. Hover: a tiny parcel slides across the card.
-- **Petu**: "Food delivery, named after what I am. Built while hungry." Hover: steam rises off the card.
+- **Petu**: "Browse restaurants, fill a cart, check out. Designed to make you hungry before the last step." Hover: steam rises off the card.
 - **Vide**: "The world didn't need another video app, but I needed to know how they work." Hover: a fake video scrubber plays across the card.
 
 ### 8 · Toolbox

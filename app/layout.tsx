@@ -3,6 +3,7 @@ import { Big_Shoulders, Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { LenisProvider } from "@/components/ui/lenis-provider";
+import { DotRingCursor } from "@/components/dot-ring-cursor";
 import { SITE_URL } from "@/lib/site";
 import { Analytics } from "@vercel/analytics/next"
 
@@ -82,6 +83,7 @@ export default function RootLayout({
         </a>
         <LenisProvider>
           {children}
+          <DotRingCursor />
           <Toaster
             position="bottom-right"
             toastOptions={{

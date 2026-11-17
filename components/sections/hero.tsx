@@ -1,5 +1,6 @@
-import type { CSSProperties } from "react";
+import { Fragment, type CSSProperties } from "react";
 import { profile } from "@/lib/data";
+import { ShipWord } from "@/components/ship-word";
 
 const STAGGER = 0.06; // seconds between words
 
@@ -19,19 +20,25 @@ export function Hero() {
         <h1 className="mt-auto text-fg">
           {/* The role is part of the h1 (for search and screen readers), shown
               as a small mono line so the giant type stays about shipping. */}
-          <span className="hero-in mb-5 block font-mono text-sm uppercase tracking-[0.14em] text-muted sm:text-base">
+          <span className="hero-in mb-12 block font-mono text-sm uppercase tracking-[0.14em] text-muted sm:text-base">
             {profile.eyebrow}
-          </span>
-          <span className="sr-only">{profile.headline.join(" ")}</span>
-          <span aria-hidden className="display block text-[clamp(4rem,13vw,12.5rem)]">
+          </span>{" "}
+          {/* Words are real text (no aria-hidden copy) so "ship" can be a
+              focusable button that opens its hint. */}
+          <span className="display block text-[clamp(4rem,13vw,12.5rem)]">
             {words.map((w, i) => (
-              <span
-                key={`${w}-${i}`}
-                className="hero-in inline-block pe-[0.22em]"
-                style={{ "--hero-delay": `${STAGGER * i}s` } as CSSProperties}
-              >
-                <span className={w.toLowerCase() === "ship" ? "text-accent" : undefined}>{w}</span>
-              </span>
+              <Fragment key={`${w}-${i}`}>
+                <span
+                  // The "ship" word sits on a higher layer so its hint card
+                  // paints above the words after it.
+                  className={w.toLowerCase() === "ship" ? "hero-in relative z-30 inline-block" : "hero-in inline-block"}
+                  style={{ "--hero-delay": `${STAGGER * i}s` } as CSSProperties}
+                >
+                  {w.toLowerCase() === "ship" ? <ShipWord word={w} /> : w}
+                </span>
+                {/* A real space, so the heading reads as words, not one long string. */}
+                {i < words.length - 1 && " "}
+              </Fragment>
             ))}
           </span>
         </h1>
