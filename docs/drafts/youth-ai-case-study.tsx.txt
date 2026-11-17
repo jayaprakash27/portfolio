@@ -1,0 +1,158 @@
+// DRAFT, not served. The Youth AI case study page, parked here on request.
+// To restore: move to app/work/youth-ai/page.tsx, re-add `caseStudy: "/work/youth-ai"`
+// to `youthAI` in lib/data.ts, and the link in components/ui/store-links.tsx + sitemap.
+
+import type { Metadata } from "next";
+import Link from "next/link";
+import { experience, profile, youthAI } from "@/lib/data";
+import { StoreLinks } from "@/components/ui/store-links";
+import { PhoneScene } from "@/components/scenes/phone";
+import { Footer } from "@/components/footer";
+
+export const metadata: Metadata = {
+  title: "Youth AI case study",
+  description:
+    "How I shipped Youth AI to the App Store, Google Play and web from one React Native + Expo codebase: native extensions, streamed AI chat, offline reports, OTA releases and Arabic RTL.",
+  alternates: { canonical: youthAI.caseStudy },
+};
+
+const role = experience.find((e) => e.company === "Enigma Genomics" && e.end === "Present");
+
+const FACTS = [
+  { k: "Role", v: "Software Engineer · owned native work, performance, crash monitoring and releases" },
+  { k: "When", v: `${role?.start ?? "Nov 2024"} – present` },
+  { k: "Platforms", v: "iOS · Android · Web" },
+  { k: "Languages", v: "English · Arabic (RTL)" },
+  { k: "Stack", v: "React Native, Expo, TypeScript, Swift, EAS, Crashlytics, Vitest" },
+];
+
+const DECISIONS = [
+  {
+    title: "One Expo codebase, native only where it pays",
+    body: "The app runs on iOS, Android and web from a single React Native + Expo codebase in TypeScript. When a feature needed native code, I reached for Expo config plugins and small patches (react-native-maps, WebView, AppsFlyer) instead of ejecting, so the project kept the managed workflow and cloud builds.",
+  },
+  {
+    title: "Rich push needs a Swift extension",
+    body: "iOS only shows images in a notification if a Notification Service Extension rewrites the payload before display. I wrote that extension in Swift and wired it in through a config plugin, alongside deep links into the right screen and secure storage for tokens.",
+  },
+  {
+    title: "An AI chat that survives real networks",
+    body: "The health assistant streams replies over SSE so answers start appearing immediately, with typing indicators while it thinks. Mobile connections drop mid-answer, so the client detects a broken stream and recovers instead of leaving a half-finished reply.",
+  },
+  {
+    title: "Reports that open instantly, even offline",
+    body: "Genetic report PDFs are large. They're cached on the device with resumable downloads, so a dropped connection resumes rather than restarts, and a report opens instantly the second time. Lists were tuned with memoized hooks and stable FlatList props, and Android releases use R8 code shrinking.",
+  },
+  {
+    title: "Shipping safely, often",
+    body: "Builds go through Expo EAS and GitHub Actions. Over-the-air updates are fingerprint-based: a JavaScript update only reaches app binaries whose native layer matches it, so an OTA can never ship code that needs a native change. Firebase Crashlytics watches production, and Vitest covers the risky parts: chat streaming, Arabic text and auth errors.",
+  },
+  {
+    title: "Arabic is a layout, not a translation",
+    body: "The whole app is localized into Arabic with right-to-left layouts on iOS, Android and web: mirrored navigation, directional icons and text that flows the other way, not just swapped strings.",
+  },
+];
+
+export default function YouthAICaseStudy() {
+  return (
+    <>
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg">
+        <nav aria-label="Case study" className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+          <Link href="/" className="font-mono text-sm text-fg hover:text-accent">
+            ← {profile.name.toUpperCase()}
+          </Link>
+          <Link
+            href="/#contact"
+            className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1.5 font-mono text-xs text-fg hover:border-accent"
+          >
+            <span className="status-dot" aria-hidden />
+            {profile.status}
+          </Link>
+        </nav>
+      </header>
+
+      <main id="main" className="px-4 pt-32 sm:px-6">
+        <article className="mx-auto max-w-6xl">
+          <p className="font-mono text-xs uppercase tracking-[0.12em] text-muted">Case study · Enigma Genomics</p>
+          <h1 className="display mt-4 text-[clamp(3.5rem,10vw,9rem)] text-fg">
+            Youth AI. One codebase, <span className="text-accent">three platforms.</span>
+          </h1>
+          <p className="mt-6 max-w-[60ch] text-lg leading-relaxed text-muted">
+            Youth is a Saudi health company that turns genetic analysis into everyday advice. I built and shipped
+            their app: a report viewer, a 7-day nutrition plan, a Shopify shop with abandoned-cart reminders and an
+            AI health assistant. <span className="text-fg">It&apos;s live, so you can install it right now.</span>
+          </p>
+          <StoreLinks className="mt-6" />
+
+          <dl className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
+            {FACTS.map((f) => (
+              <div key={f.k} className="bg-bg p-5">
+                <dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted">{f.k}</dt>
+                <dd className="mt-2 text-sm text-fg">{f.v}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <div className="mt-20 grid gap-10 md:grid-cols-3" aria-hidden>
+            <figure className="flex flex-col items-center gap-3">
+              <div className="w-full">
+                <PhoneScene beat="codebase" p={0.1} />
+              </div>
+              <figcaption className="font-mono text-xs text-muted">Home · report, plan, shop</figcaption>
+            </figure>
+            <figure className="flex flex-col items-center gap-3">
+              <div className="w-full">
+                <PhoneScene beat="chat" p={1} />
+              </div>
+              <figcaption className="font-mono text-xs text-muted">AI assistant · streamed reply</figcaption>
+            </figure>
+            <figure className="flex flex-col items-center gap-3">
+              <div className="w-full">
+                <PhoneScene beat="rtl" p={1} />
+              </div>
+              <figcaption className="font-mono text-xs text-muted">Arabic · right to left</figcaption>
+            </figure>
+          </div>
+
+          <section aria-labelledby="decisions" className="mt-24">
+            <h2 id="decisions" className="display text-[clamp(2.5rem,6vw,5rem)] text-fg">
+              Decisions worth explaining.
+            </h2>
+            <ol className="mt-10 flex flex-col">
+              {DECISIONS.map((d, i) => (
+                <li key={d.title} className="grid gap-4 border-t border-line py-8 md:grid-cols-[80px_minmax(0,320px)_minmax(0,1fr)]">
+                  <span className="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
+                  <h3 className="text-xl font-medium text-fg">{d.title}</h3>
+                  <p className="leading-relaxed text-muted">{d.body}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section aria-labelledby="outcome" className="mt-16 rounded-3xl border border-line bg-card p-8 sm:p-10">
+            <h2 id="outcome" className="display text-[clamp(2.5rem,5vw,4.5rem)] text-fg">
+              Where it landed.
+            </h2>
+            <ul className="mt-6 flex flex-col gap-3 text-lg text-fg">
+              <li>Live on the App Store, Google Play and the web, from one codebase.</li>
+              <li>Native features without leaving Expo: rich push, deep links, secure storage, maps.</li>
+              <li>Releases automated end to end, with crash reporting and tests on the risky paths.</li>
+              <li>Fully usable in Arabic, right to left, on every platform.</li>
+              <li className="text-muted">And somewhere in there, intern → full-time in 6 months.</li>
+            </ul>
+            <div className="mt-8 flex flex-wrap gap-2">
+              <StoreLinks />
+              <Link
+                href="/#contact"
+                className="inline-flex items-center rounded-full bg-accent px-3.5 py-2 font-mono text-xs text-on-accent hover:opacity-90"
+              >
+                Talk to me about it →
+              </Link>
+            </div>
+          </section>
+        </article>
+      </main>
+      <Footer />
+    </>
+  );
+}

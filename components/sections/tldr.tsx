@@ -1,5 +1,6 @@
 import { chapters, profile, tldr } from "@/lib/data";
 import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
+import { StoreLinks } from "@/components/ui/store-links";
 import {
   PreviewGenomics,
   PreviewLouverline,
@@ -66,6 +67,7 @@ export function Tldr() {
           <div>
             <h4 className="text-sm font-semibold text-fg">What&apos;s new · {tldr.whatsNew.version}</h4>
             <p className="mt-1 text-sm leading-relaxed text-muted">{tldr.whatsNew.text}</p>
+            <StoreLinks className="mt-3" />
           </div>
 
           <div className="mt-5 grid grid-cols-4 gap-2">

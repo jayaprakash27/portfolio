@@ -8,6 +8,7 @@ import { Changelog } from "@/components/sections/changelog";
 import { Projects } from "@/components/sections/projects";
 import { Toolbox } from "@/components/sections/toolbox";
 import { TheEnd } from "@/components/sections/the-end";
+import { jsonLdScript, personJsonLd } from "@/lib/site";
 
 /**
  * Two reading speeds on one page:
@@ -17,8 +18,9 @@ import { TheEnd } from "@/components/sections/the-end";
 export default function Home() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(personJsonLd())} />
       <Navbar />
-      <main className="relative">
+      <main id="main" className="relative">
         <Hero />
         <Tldr />
         <Story />

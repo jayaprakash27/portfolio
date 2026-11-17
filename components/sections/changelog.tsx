@@ -1,5 +1,6 @@
 import { experience, type NoteType } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { StoreLinks } from "@/components/ui/store-links";
 
 const TAG: Record<NoteType, string> = {
   added: "text-accent",
@@ -46,6 +47,9 @@ export function Changelog() {
                     </li>
                   ))}
                 </ul>
+                {role.company === "Enigma Genomics" && role.end === "Present" && (
+                  <StoreLinks className="mt-5" />
+                )}
                 <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Stack">
                   {role.stack.map((s) => (
                     <li key={s} className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-muted">

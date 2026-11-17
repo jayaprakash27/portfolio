@@ -8,7 +8,7 @@ import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
 import { profile } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
-type FormValues = { name: string; email: string; message: string };
+type FormValues = { name: string; email: string; message: string; website: string };
 
 // Validated with react-hook-form's built-in rules: zod would add ~400 KB
 // to the first page load for three fields. The API route still validates.
@@ -47,6 +47,8 @@ export function TheEnd() {
       const data = (await res.json()) as { ok: boolean; error?: string };
       if (!res.ok || !data.ok) throw new Error(data.error || "Something went wrong");
       toast.success("Sent. I'll reply soon.");
+      // A small "sent" tap on phones that support it (Android). No-op elsewhere.
+      navigator.vibrate?.([12, 40, 18]);
       reset();
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Couldn't send. Try email instead.");
@@ -95,6 +97,15 @@ export function TheEnd() {
                 Send
               </button>
             </div>
+            {/* Honeypot: off-screen and skipped by keyboard and screen readers. */}
+            <input
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden
+              className="absolute -left-[9999px] h-px w-px opacity-0"
+              {...register("website")}
+            />
             <Row label="To">
               <span className="truncate text-fg">Jay · {profile.email}</span>
             </Row>
@@ -107,7 +118,7 @@ export function TheEnd() {
             <Field label="Message" error={errors.message?.message} stacked>
               <textarea
                 rows={7}
-                placeholder="We're hiring a React Native engineer who…"
+                placeholder="We're hiring someone who ships mobile and web…"
                 {...register("message", rules.message)}
                 className={cn(inputCls, "resize-none leading-relaxed")}
               />

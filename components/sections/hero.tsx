@@ -16,9 +16,14 @@ export function Hero() {
   return (
     <section id="top" className="relative flex min-h-[100svh] flex-col px-4 pb-10 pt-24 sm:px-6">
       <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col">
-        <h1 className="display mt-auto text-[clamp(4rem,13vw,12.5rem)] text-fg">
+        <h1 className="mt-auto text-fg">
+          {/* The role is part of the h1 (for search and screen readers), shown
+              as a small mono line so the giant type stays about shipping. */}
+          <span className="hero-in mb-5 block font-mono text-sm uppercase tracking-[0.14em] text-muted sm:text-base">
+            {profile.eyebrow}
+          </span>
           <span className="sr-only">{profile.headline.join(" ")}</span>
-          <span aria-hidden>
+          <span aria-hidden className="display block text-[clamp(4rem,13vw,12.5rem)]">
             {words.map((w, i) => (
               <span
                 key={`${w}-${i}`}

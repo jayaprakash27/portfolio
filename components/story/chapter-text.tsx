@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import type { Chapter } from "@/lib/data";
+import { StoreLinks } from "@/components/ui/store-links";
 
 /**
  * The text half of a chapter. The headline is the skim layer (a recruiter
@@ -33,6 +34,7 @@ export function ChapterText({
           {chapter.quip && <span className="text-fg">{chapter.quip}</span>}
         </p>
       )}
+      {chapter.storeLinks && <StoreLinks />}
     </div>
   );
 }

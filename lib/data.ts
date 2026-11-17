@@ -10,12 +10,13 @@
 export const profile = {
   name: "Jayaprakash Sahoo",
   shortName: "Jay",
-  role: "React Native Engineer",
-  /** Two-line hero headline. */
-  headline: ["React Native engineer.", "I ship to the stores."],
-  intro: "Hi, I'm Jay. I build apps that make it through App Store review. Usually on the first try.",
-  /** Kept for the current hero until the redesign replaces it. */
-  tagline: "React Native engineer. I ship to the stores.",
+  role: "React Native & Next.js Engineer",
+  /** Small mono line above the hero headline. */
+  eyebrow: "React Native · Next.js engineer",
+  /** Two-line hero headline. "ship" is the accent word. */
+  headline: ["I ship to the stores.", "And the browser."],
+  intro:
+    "Hi, I'm Jay. React Native for phones, Next.js for the web, one TypeScript brain for both. My apps make it through App Store review. Usually on the first try.",
   status: "Open to work",
   location: "India · Remote",
   email: "jay27codes@gmail.com",
@@ -28,29 +29,26 @@ export const profile = {
   resumeUrl: "/resume.pdf",
 } as const;
 
+/** Youth AI is live: real store listings (region-free App Store link). */
+export const youthAI = {
+  name: "Youth AI",
+  appStore: "https://apps.apple.com/app/id6769384688",
+  playStore: "https://play.google.com/store/apps/details?id=ai.myyouth",
+} as const;
+
 /** The App Store–style "short version" card that Skip intro lands on. */
 export const tldr = {
   stats: [
     { value: "2 yrs", label: "full-time" },
-    { value: "3", label: "platforms" },
     { value: "1 app", label: "live in stores" },
+    { value: "1,378", label: "exomes · Next.js" },
   ],
   whatsNew: {
     version: "v2.0",
     text: "Promoted intern to full-time in 6 months. Added Arabic and right-to-left support.",
   },
   summary:
-    "React Native engineer with 2 years of full-time startup experience and three internships. Shipped an Expo app to the App Store and Google Play, owning native work, performance, crash monitoring and releases.",
-} as const;
-
-export const about = {
-  body: tldr.summary,
-  highlights: [
-    { label: "Shipping since", value: "2023" },
-    { label: "Daily driver", value: "React Native · TS" },
-    { label: "Platforms", value: "iOS · Android · Web" },
-    { label: "Remote from", value: "India" },
-  ],
+    "React Native and Next.js engineer with 2 years of full-time startup experience and three internships. Shipped an Expo app to the App Store, Google Play and the web, owning native work, performance, crash monitoring and releases, and built a Next.js variant browser over 1,378 Saudi exomes.",
 } as const;
 
 /* ------------------------------------------------------------------ */
@@ -236,6 +234,8 @@ export type Chapter = {
   scene: SceneKey;
   /** Brand-colour nod for this chapter's scene (one detail only). */
   brand?: string;
+  /** Show the live App Store / Google Play links under the text. */
+  storeLinks?: boolean;
 };
 
 export const chapters: Chapter[] = [
@@ -248,6 +248,7 @@ export const chapters: Chapter[] = [
       "The Youth AI app runs on iOS, Android and web from the same TypeScript. Report viewer, a 7-day nutrition plan, and a Shopify shop that gently reminds you about the cart you abandoned.",
     quip: "We've all been there.",
     scene: "phone-codebase",
+    storeLinks: true,
   },
   {
     id: "native",
@@ -332,7 +333,7 @@ export const chapters: Chapter[] = [
 ];
 
 /* ------------------------------------------------------------------ */
-/*  Skills — grouped as on the resume                                  */
+/*  Skills — Mobile and Web side by side                               */
 /* ------------------------------------------------------------------ */
 
 export const skills = {
@@ -342,27 +343,20 @@ export const skills = {
     "Expo (EAS, config plugins, OTA updates)",
     "Swift (iOS extensions)",
     "Xcode",
+    "NativeWind",
     "Crashlytics",
   ],
-  "State and UI": [
+  Web: ["Next.js", "React", "Tailwind CSS", "MUI", "Three.js"],
+  "State and data": [
     "TanStack Query",
     "Redux",
-    "React",
-    "Next.js",
-    "Tailwind CSS",
-    "NativeWind",
-    "MUI",
-  ],
-  "APIs and tools": [
     "REST APIs",
     "SSE",
     "Hasura GraphQL",
     "Firebase",
     "Shopify Storefront API",
-    "Git",
-    "GitHub Actions",
-    "Vitest",
   ],
+  Tools: ["Git", "GitHub Actions", "Vitest"],
 } as const;
 
 /* ------------------------------------------------------------------ */
