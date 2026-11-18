@@ -17,9 +17,19 @@ function PlayGlyph() {
   );
 }
 
+function WebGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18" />
+    </svg>
+  );
+}
+
 /**
- * Live store links for Youth AI. Drawn in the site's own style (not the
- * official badge artwork) so they sit naturally next to the other pills.
+ * Live links for Youth AI: App Store, Google Play and the web app. Drawn in
+ * the site's own style (not the official badge artwork) so they sit naturally
+ * next to the other pills.
  */
 export function StoreLinks({ className }: { className?: string }) {
   const pill =
@@ -31,6 +41,9 @@ export function StoreLinks({ className }: { className?: string }) {
       </a>
       <a href={youthAI.playStore} target="_blank" rel="noreferrer" className={pill}>
         <PlayGlyph /> Google Play <span className="text-muted">↗</span>
+      </a>
+      <a href={youthAI.web} target="_blank" rel="noreferrer" className={pill}>
+        <WebGlyph /> Web app <span className="text-muted">↗</span>
       </a>
     </div>
   );

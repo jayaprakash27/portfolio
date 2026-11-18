@@ -28,9 +28,10 @@ export function personJsonLd() {
       {
         "@type": "MobileApplication",
         name: youthAI.name,
-        operatingSystem: "iOS, Android",
+        operatingSystem: "iOS, Android, Web",
         applicationCategory: "HealthApplication",
         installUrl: [youthAI.appStore, youthAI.playStore],
+        url: youthAI.web,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
         contributor: { "@id": `${SITE_URL}/#person` },
       },

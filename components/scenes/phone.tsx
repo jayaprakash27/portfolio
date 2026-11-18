@@ -52,7 +52,7 @@ function StatusBar({ platform }: { platform: Platform }) {
         <span className="h-2.5 w-2.5 rounded-full bg-line" />
         <span className="h-2.5 w-2.5 rounded-full bg-line" />
         <span className="ml-2 flex-1 truncate rounded-full border border-line px-3 py-0.5 font-mono text-[10px] text-muted">
-          app.youthai.health
+          webapp.myyouth.ai
         </span>
       </div>
     );
@@ -225,7 +225,7 @@ function NativeScreen({ p }: { p: number }) {
           animate={{ opacity: 1, y: 0 }}
           className="absolute inset-0 flex flex-col gap-3 px-4 text-fg"
         >
-          <p className="truncate font-mono text-[10px] text-accent">youthai://report/vitamin-d</p>
+          <p className="truncate font-mono text-[10px] text-accent">opened via deep link</p>
           <p className="display text-4xl">Vitamin D</p>
           <p className="text-sm text-muted">18 ng/mL. The healthy range is 20–50.</p>
           <Meter value={0.36} />

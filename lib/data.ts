@@ -35,6 +35,7 @@ export const youthAI = {
   name: "Youth AI",
   appStore: "https://apps.apple.com/app/id6769384688",
   playStore: "https://play.google.com/store/apps/details?id=ai.myyouth",
+  web: "https://webapp.myyouth.ai",
 } as const;
 
 /** The App Store–style "short version" card that Skip intro lands on. */
